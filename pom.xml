@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>cc.d-z</groupId>
 	<artifactId>easyorm</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<name>EASYORM</name>
 
 	<inceptionYear>2014</inceptionYear>
@@ -16,8 +16,15 @@
 
 	<issueManagement>
 		<system>jira</system>
-		<url>http://issues.apache.org/jira/browse/LANG</url>
+		<url>https://issues.sonatype.org/browse/OSSRH-8392</url>
 	</issueManagement>
+
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+		</license>
+	</licenses>
 
 	<developers>
 		<developer>
@@ -53,6 +60,7 @@
 		<maven.compiler.source>1.6</maven.compiler.source>
 		<maven.compiler.target>1.6</maven.compiler.target>
 	</properties>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -85,7 +93,38 @@
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<version>1.1</version>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
+
+	<scm>
+		<connection>scm:git:https://github.com/davy-zhang/EasyORM.git</connection>
+		<developerConnection>scm:git:https://github.com/davy-zhang/EasyORM.git</developerConnection>
+		<url>https://github.com/davy-zhang/EasyORM.git</url>
+	</scm>
+
+	<distributionManagement>
+		<repository>
+			<id>sonatype-nexus-staging</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+		<snapshotRepository>
+			<id>sonatype-nexus-snapshots</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
 
 </project>
