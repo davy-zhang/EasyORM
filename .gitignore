@@ -1,2 +1,13 @@
 /target
-/bin
+.*
+.settings/org.eclipse.jdt.ui.prefs
+
+bin/
+
+.project
+
+.project
+
+.classpath
+
+.classpath
