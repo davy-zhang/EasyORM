@@ -7,7 +7,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>EASYORM</name>
 	<packaging>pom</packaging>
-	
+
 	<inceptionYear>2014</inceptionYear>
 	<description>
   		一个易于使用的、零配置的ORM框架
@@ -45,12 +45,52 @@
 			<name>Davy Zhang</name>
 		</contributor>
 	</contributors>
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-lang3</artifactId>
 				<version>3.1</version>
+			</dependency>
+			<dependency>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>15.0</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-jdbc</artifactId>
+				<version>3.1.1.RELEASE</version>
+				<type>jar</type>
+			</dependency>
+			<dependency>
+				<groupId>log4j</groupId>
+				<artifactId>log4j</artifactId>
+				<version>1.2.16</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>1.6.3</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-log4j12</artifactId>
+				<version>1.6.1</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>5.1.16</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-dbcp</groupId>
+				<artifactId>commons-dbcp</artifactId>
+				<version>1.4</version>
+				<type>jar</type>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -128,9 +168,7 @@
 		</snapshotRepository>
 	</distributionManagement>
 
-
 	<modules>
-		<module>easyorm-library</module>
 		<module>easyorm-lib</module>
 	</modules>
 </project>
