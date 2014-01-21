@@ -4,7 +4,6 @@ import java.util.List;
 
 import cc.d_z.easyorm.beans.DAOBean;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Interface IDAO.
  * 
@@ -14,50 +13,52 @@ import cc.d_z.easyorm.beans.DAOBean;
  *         email: davy@d-z.cc<br>
  *         <a href="http://d-z.cc">d-z.cc</a><br>
  */
+
+//TODO 此接口需要改动
 public interface IDAO {
 
 	/**
 	 * Insert.
 	 * 
-	 * @param <B>
+	 * @param <D>
 	 *            the generic type
 	 * @param bs
 	 *            the bs
 	 * @return the list
 	 */
-	public <B extends DAOBean> List<B> insert(B... bs);
+	public <D extends DAOBean> List<D> insert(D... bs);
 
 	/**
 	 * Delete.
 	 * 
-	 * @param <B>
+	 * @param <D>
 	 *            the generic type
 	 * @param bs
 	 *            the bs
 	 * @return the list
 	 */
-	public <B extends DAOBean> List<B> delete(B... bs);
+	public <D extends DAOBean> List<D> delete(D... bs);
 
 	/**
 	 * Update.
 	 * 
-	 * @param <B>
+	 * @param <D>
 	 *            the generic type
 	 * @param bs
 	 *            the bs
 	 * @return the list
 	 */
-	public <B extends DAOBean> List<B> update(B... bs);
+	public <D extends DAOBean> List<D> update(D... bs);
 
 	/**
 	 * Select.
 	 * 
-	 * @param <B>
+	 * @param <D>
 	 *            the generic type
 	 * @param bs
 	 *            the bs
 	 * @return the list
 	 */
-	public <B extends DAOBean> List<B> select(B... bs) throws Exception;
+	public <D extends DAOBean> List<D> select(D... bs) throws Exception;
 
 }

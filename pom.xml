@@ -68,7 +68,6 @@
 				<groupId>log4j</groupId>
 				<artifactId>log4j</artifactId>
 				<version>1.2.16</version>
-				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.slf4j</groupId>
@@ -79,7 +78,6 @@
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-log4j12</artifactId>
 				<version>1.6.1</version>
-				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>mysql</groupId>
@@ -91,6 +89,16 @@
 				<artifactId>commons-dbcp</artifactId>
 				<version>1.4</version>
 				<type>jar</type>
+			</dependency>
+			<dependency>
+				<groupId>cc.d-z</groupId>
+				<artifactId>easyorm-lib</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.9</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -170,5 +178,6 @@
 
 	<modules>
 		<module>easyorm-lib</module>
+		<module>easyorm-test</module>
 	</modules>
 </project>

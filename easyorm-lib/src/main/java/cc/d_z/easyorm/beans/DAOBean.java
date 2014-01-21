@@ -5,6 +5,8 @@ import java.lang.reflect.Field;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import cc.d_z.easyorm.utils.DAOBeanUtils;
+
 /**
  * The Class DAOBean.
  * 
@@ -15,8 +17,28 @@ import org.apache.commons.lang3.StringUtils;
  *         <a href="http://d-z.cc">d-z.cc</a><br>
  */
 public class DAOBean {
-	
-	
+
+	@Override
+	public boolean equals(Object other) {
+		if (this == other)
+			return true;
+		if (other == null)
+			return false;
+		if (getClass() != other.getClass())
+			return false;
+		return equals((DAOBean) other);
+	}
+
+//	private boolean equals(DAOBean other) {
+//		try {
+//			Field[] thisFields = DAOBeanUtils.getNotNullFields(this);
+//			Field[] otherFields = DAOBeanUtils.getNotNullFields(other);
+//			return DAOBeanUtils.isSame(this,thisFields,other,otherFields);
+//		} catch (Exception e) {
+//			return false;
+//		}
+//	}
+
 	@Override
 	public String toString() {
 		StringBuffer sb = new StringBuffer();

@@ -34,7 +34,7 @@ public class BasicDAOImpl extends MysqlDAO implements IDAO{
 	 */
 	@Override
 	public <B extends DAOBean> List<B> insert(B... bs) {
-		// TODO Auto-generated method stub
+		// TODO BasicDAOImpl的insert方法还没实现，
 		return null;
 	}
 
@@ -43,7 +43,7 @@ public class BasicDAOImpl extends MysqlDAO implements IDAO{
 	 */
 	@Override
 	public <B extends DAOBean> List<B> delete(B... bs) {
-		// TODO Auto-generated method stub
+		// TODO BasicDAOImpl的delete方法还没实现
 		return null;
 	}
 
@@ -52,7 +52,7 @@ public class BasicDAOImpl extends MysqlDAO implements IDAO{
 	 */
 	@Override
 	public <B extends DAOBean> List<B> update(B... bs) {
-		// TODO Auto-generated method stub
+		// TODO BasicDAOImpl的update方法还没实现
 		return null;
 	}
 
@@ -61,7 +61,7 @@ public class BasicDAOImpl extends MysqlDAO implements IDAO{
 	 */
 	@Override
 	public <B extends DAOBean> List<B> select(B... bs) throws Exception {
-		// TODO Auto-generated method stub
+		// TODO BasicDAOImpl的select方法还没实现
 		return null;
 	}
  
