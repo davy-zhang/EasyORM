@@ -6,7 +6,8 @@
 	<artifactId>easyorm</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>EASYORM</name>
-
+	<packaging>pom</packaging>
+	
 	<inceptionYear>2014</inceptionYear>
 	<description>
   		一个易于使用的、零配置的ORM框架
@@ -44,15 +45,15 @@
 			<name>Davy Zhang</name>
 		</contributor>
 	</contributors>
-
-	<dependencies>
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-			<version>3.1</version>
-		</dependency>
-	</dependencies>
-
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>3.1</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -127,4 +128,9 @@
 		</snapshotRepository>
 	</distributionManagement>
 
+
+	<modules>
+		<module>easyorm-library</module>
+		<module>easyorm-lib</module>
+	</modules>
 </project>
