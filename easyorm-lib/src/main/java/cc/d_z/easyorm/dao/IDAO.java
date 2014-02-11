@@ -1,6 +1,7 @@
 package cc.d_z.easyorm.dao;
 
 import java.util.List;
+import java.util.Map.Entry;
 
 import cc.d_z.easyorm.beans.DAOBean;
 
@@ -14,7 +15,6 @@ import cc.d_z.easyorm.beans.DAOBean;
  *         <a href="http://d-z.cc">d-z.cc</a><br>
  */
 
-//TODO 此接口需要改动
 public interface IDAO {
 
 	/**
@@ -22,43 +22,61 @@ public interface IDAO {
 	 * 
 	 * @param <D>
 	 *            the generic type
-	 * @param bs
-	 *            the bs
+	 * @param daoBean
+	 *            the dao bean
 	 * @return the list
 	 */
-	public <D extends DAOBean> List<D> insert(D... bs);
+	public <D extends DAOBean> List<Entry<D, Exception>> insert(D... daoBean);
+
+	/**
+	 * Insert.
+	 * 
+	 * @param <D>
+	 *            the generic type
+	 * @param daoBean
+	 *            the dao bean
+	 * @throws Exception
+	 *             the exception
+	 */
+	public <D extends DAOBean> void insert(D daoBean) throws Exception;
 
 	/**
 	 * Delete.
 	 * 
 	 * @param <D>
 	 *            the generic type
-	 * @param bs
-	 *            the bs
+	 * @param daoBean
+	 *            the dao bean
 	 * @return the list
+	 * @throws Exception
+	 *             the exception
 	 */
-	public <D extends DAOBean> List<D> delete(D... bs);
+	public <D extends DAOBean> void delete(D daoBean) throws Exception;
 
 	/**
 	 * Update.
 	 * 
 	 * @param <D>
 	 *            the generic type
-	 * @param bs
-	 *            the bs
+	 * @param daoBean
+	 *            the dao bean
 	 * @return the list
+	 * @throws Exception
+	 *             the exception
 	 */
-	public <D extends DAOBean> List<D> update(D... bs);
+	public <D extends DAOBean> void update(D daoBean) throws Exception;
 
 	/**
 	 * Select.
 	 * 
 	 * @param <D>
 	 *            the generic type
-	 * @param bs
-	 *            the bs
+	 * @param daoBean
+	 *            the dao bean
 	 * @return the list
+	 * @throws Exception
+	 *             the exception
 	 */
-	public <D extends DAOBean> List<D> select(D... bs) throws Exception;
+	public <D extends DAOBean> List<D> select(D daoBean) throws Exception;
 
 }

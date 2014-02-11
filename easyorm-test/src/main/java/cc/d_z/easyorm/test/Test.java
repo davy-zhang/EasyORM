@@ -21,4 +21,8 @@ public class Test {
 		StackTraceElement refStack = stack[1];
 		org.junit.Assert.fail("在" + refStack.getClassName() + "类的" + refStack.getMethodName() + "方法的" + refStack.getLineNumber() + "行中有错误，请注意查看");
 	}
+	
+	protected void fail(Throwable t) {
+		throw new AssertionError(t);
+	}
 }
