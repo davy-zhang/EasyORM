@@ -45,9 +45,9 @@ public class BasicDaoImplTest extends cc.d_z.easyorm.test.Test {
 	@Test
 	public void testDelete() {
 		People people = new People();
-//		people.id = 3l;
+		people.id = 3l;
 //		people.name = "davy";
-		people.age = 26;
+//		people.age = 26;
 		try {
 			dao.delete(people);
 		} catch (Exception e) {
