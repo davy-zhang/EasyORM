@@ -153,8 +153,8 @@ public class BasicDAOImpl extends MysqlDAO implements IDAO {
 			logger.warn(message);
 			throw new NullPointerException(message);
 		}
-		Object[] args=null;
-		String sql=null;
+		Object[] args = null;
+		String sql = null;
 		Field[] uniqueFields = getUniqueField(daoBean);
 		logger.trace("准备向" + dbName + "库的" + getTableName(daoBean) + "表中删除" + daoBean);
 		if (uniqueFields != null && uniqueFields.length != 0) {
@@ -163,8 +163,8 @@ public class BasicDAOImpl extends MysqlDAO implements IDAO {
 			args = getFieldsValue(uniqueFields, daoBean);
 
 			sql = makeDeleteSql(daoBean, uniqueCols);
-			
-		}else{
+
+		} else {
 			String[] notNullCols = getFieldsName(getNotNullFields(daoBean));
 			logger.trace("notNullCols是:" + Arrays.toString(notNullCols));
 			args = getNotNullValue(daoBean);
@@ -307,6 +307,21 @@ public class BasicDAOImpl extends MysqlDAO implements IDAO {
 			}
 		}
 		return rs;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see cc.d_z.easyorm.dao.IDAO#selectOne(cc.d_z.easyorm.beans.DAOBean)
+	 */
+	@Override
+	public <D extends DAOBean> D selectOne(D daoBean) throws Exception {
+		List<D> ds = select(daoBean);
+		if (ds != null && ds.size() != 0) {
+			return ds.get(0);
+		} else {
+			return null;
+		}
 	}
 
 }

@@ -5,6 +5,7 @@ import java.util.Map.Entry;
 
 import cc.d_z.easyorm.beans.DAOBean;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Interface IDAO.
  * 
@@ -78,5 +79,18 @@ public interface IDAO {
 	 *             the exception
 	 */
 	public <D extends DAOBean> List<D> select(D daoBean) throws Exception;
+
+	/**
+	 * Select one.
+	 * 
+	 * @param <D>
+	 *            the generic type
+	 * @param daoBean
+	 *            the dao bean
+	 * @return the d
+	 * @throws Exception
+	 *             the exception
+	 */
+	public <D extends DAOBean> D selectOne(D daoBean) throws Exception;
 
 }

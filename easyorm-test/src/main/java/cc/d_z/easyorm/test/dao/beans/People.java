@@ -15,4 +15,5 @@ public class People extends DAOBean {
 	public Long id;
 	public String name;
 	public Integer age;
+	public Double hight;
 }

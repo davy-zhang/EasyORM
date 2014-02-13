@@ -26,10 +26,12 @@ public class BasicDaoImplTest extends cc.d_z.easyorm.test.Test {
 	 * {@link cc.d_z.easyorm.dao.impls.BasicDAOImpl#insert(cc.d_z.easyorm.beans.DAOBean)}
 	 * .
 	 */
+	@Test
 	public void testInsertD() {
 		People people = new People();
 		people.age = 25;
 		people.name = "davy";
+		people.hight=1.82;
 		try {
 			dao.insert(people);
 		} catch (Exception e) {
@@ -60,11 +62,13 @@ public class BasicDaoImplTest extends cc.d_z.easyorm.test.Test {
 	 * {@link cc.d_z.easyorm.dao.impls.BasicDAOImpl#update(cc.d_z.easyorm.beans.DAOBean)}
 	 * .
 	 */
+	@Test
 	public void testUpdate() {
 		People people = new People();
-		people.id = 1l;
+		people.id = 15l;
 		people.name = "davy";
 		people.age = 25;
+		people.hight=1.83;
 		try {
 			dao.update(people);
 		} catch (Exception e) {
@@ -77,6 +81,7 @@ public class BasicDaoImplTest extends cc.d_z.easyorm.test.Test {
 	 * {@link cc.d_z.easyorm.dao.impls.BasicDAOImpl#select(cc.d_z.easyorm.beans.DAOBean)}
 	 * .
 	 */
+	@Test
 	public void testSelect() {
 		People people = new People();
 		try {
