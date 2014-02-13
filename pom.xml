@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>cc.d-z</groupId>
 	<artifactId>easyorm</artifactId>
@@ -171,13 +172,17 @@
 		<connection>scm:git:https://github.com/davy-zhang/EasyORM.git</connection>
 		<developerConnection>scm:git:https://github.com/davy-zhang/EasyORM.git</developerConnection>
 		<url>https://github.com/davy-zhang/EasyORM.git</url>
-	  <tag>easyorm-0.0.1</tag>
-  </scm>
+		<tag>easyorm-0.0.1</tag>
+	</scm>
 
 	<distributionManagement>
+<!-- 		<repository> -->
+<!-- 			<id>sonatype-nexus-staging</id> -->
+<!-- 			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url> -->
+<!-- 		</repository> -->
 		<repository>
-			<id>sonatype-nexus-staging</id>
-			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+			<id>sonatype-nexus-releases</id>
+			<url>https://oss.sonatype.org/content/repositories/releases/</url>
 		</repository>
 		<snapshotRepository>
 			<id>sonatype-nexus-snapshots</id>
