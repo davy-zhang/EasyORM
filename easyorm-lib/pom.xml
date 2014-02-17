@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>cc.d-z</groupId>
 		<artifactId>easyorm</artifactId>
-		<version>0.0.2-SNAPSHOT</version>
+		<version>0.0.3-SNAPSHOT</version>
 	</parent>
 	<artifactId>easyorm-lib</artifactId>
 
@@ -46,7 +46,4 @@
 		</dependency>
 	</dependencies>
 
-  <scm>
-    <tag>easyorm-0.0.2</tag>
-  </scm>
 </project>
