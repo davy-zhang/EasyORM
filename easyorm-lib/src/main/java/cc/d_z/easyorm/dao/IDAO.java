@@ -27,7 +27,7 @@ public interface IDAO {
 	 *            the dao bean
 	 * @return the list
 	 */
-	public <D extends DAOBean> List<Entry<D, Exception>> insert(D... daoBean);
+	public <D extends DAOBean> List<Entry<D, Exception>> insert(D... daoBeans);
 
 	/**
 	 * Insert.

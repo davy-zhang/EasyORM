@@ -1,5 +1,8 @@
 package cc.d_z.easyorm.test.dao.beans;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import cc.d_z.easyorm.annotations.Unique;
 import cc.d_z.easyorm.beans.DAOBean;
 
@@ -16,4 +19,5 @@ public class People extends DAOBean {
 	public String name;
 	public Integer age;
 	public Double hight;
+
 }

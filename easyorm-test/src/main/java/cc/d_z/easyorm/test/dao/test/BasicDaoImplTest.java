@@ -93,6 +93,24 @@ public class BasicDaoImplTest extends cc.d_z.easyorm.test.Test {
 			fail(e);
 		}
 	}
+	
+	/**
+	 * Test method for
+	 * {@link cc.d_z.easyorm.dao.impls.BasicDAOImpl#selectOne(cc.d_z.easyorm.beans.DAOBean)}
+	 * .
+	 */
+	@Test
+	public void testSelectOne() {
+		People people = new People();
+		people.id=4l;
+		try {
+			People result = dao.selectOne(people);
+			System.out.println(result);
+		} catch (Exception e) {
+			fail(e);
+		}
+	}
+	
 
 	/**
 	 * Test method for {@link cc.d_z.easyorm.dao.impls.BasicDAOImpl#insert(D[])}

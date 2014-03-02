@@ -5,7 +5,7 @@ package cc.d_z.easyorm.dao.impls;
 
 import static cc.d_z.easyorm.utils.FieldUtils.*;
 import static cc.d_z.easyorm.utils.DAOBeanUtils.*;
-import static org.apache.commons.lang3.StringUtils.*;
+import static cc.d_z.easyorm.utils.SQLMaker.*;
 
 import java.lang.reflect.Field;
 import java.sql.ResultSet;
@@ -17,11 +17,8 @@ import java.util.Map.Entry;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.support.KeyHolder;
 
-import cc.d_z.easyorm.annotations.Unique;
 import cc.d_z.easyorm.beans.DAOBean;
 import cc.d_z.easyorm.dao.IDAO;
 import cc.d_z.easyorm.dao.MysqlDAO;
@@ -68,7 +65,7 @@ public class BasicDAOImpl extends MysqlDAO implements IDAO {
 		Object[] notNullVals = getNotNullValue(daoBean);
 		logger.trace("notNullVals是:" + Arrays.toString(notNullVals));
 
-		String sql = makeInsertSql(daoBean, notNullCols);
+		String sql = makeInsertSQL(daoBean, notNullCols);
 		logger.trace("创建出的sql:" + sql + ",args:" + Arrays.toString(notNullVals));
 		try {
 			getJdbcTemplate().update(sql, notNullVals);
@@ -78,67 +75,6 @@ public class BasicDAOImpl extends MysqlDAO implements IDAO {
 			throw e;
 		}
 
-	}
-
-	private <D extends DAOBean> String makeInsertSql(D daoBean, String[] notNullCols) {
-		String tableName = getTableName(daoBean);
-
-		String sql = "insert into `" + tableName + "` ( ";
-		for (int i = 0; notNullCols != null && i < notNullCols.length; i++) {
-			sql += " `" + notNullCols[i] + "` ,";
-		}
-		sql = removeEnd(sql, ",") + ") values ( ";
-		for (int i = 0; notNullCols != null && i < notNullCols.length; i++) {
-			sql += "? ,";
-		}
-		sql = removeEnd(sql, ",") + ")";
-		return sql;
-	}
-
-	private <D extends DAOBean> String makeSelectSql(D daoBean, String[] notNullCols) {
-		String sql = "select * from `" + getTableName(daoBean) + "`";
-		if (notNullCols != null && notNullCols.length != 0) {
-			sql += " where ";
-			for (String col : notNullCols) {
-				sql += " `" + col + "` = ? and";
-			}
-			sql = removeEnd(sql, "and");
-		}
-		return sql;
-	}
-
-	private <D extends DAOBean> String makeUpdateSql(D daoBean, String[] uniqueCols, String[] allCols) {
-		String sql = "update `" + getTableName(daoBean) + "` set ";
-		if (allCols != null && allCols.length != 0) {
-			for (String col : allCols) {
-				sql += " `" + col + "` = ? ,";
-			}
-			sql = removeEnd(sql, ",");
-		}
-		if (uniqueCols != null && uniqueCols.length != 0) {
-			sql += " where ";
-			for (String col : uniqueCols) {
-				sql += " `" + col + "` = ? and";
-			}
-			sql = removeEnd(sql, "and");
-		}
-		return sql;
-	}
-
-	private <D extends DAOBean> String makeDeleteSql(D daoBean, String[] uniqueCols) {
-		String sql = "delete from `" + getTableName(daoBean) + "` ";
-		if (uniqueCols != null && uniqueCols.length != 0) {
-			sql += " where ";
-			for (String col : uniqueCols) {
-				sql += " `" + col + "` = ? and";
-			}
-			sql = removeEnd(sql, "and");
-		}
-		return sql;
-	}
-
-	private <D extends DAOBean> String getTableName(D daoBean) {
-		return lowerCase(daoBean.getClass().getSimpleName());
 	}
 
 	/*
@@ -162,13 +98,13 @@ public class BasicDAOImpl extends MysqlDAO implements IDAO {
 			logger.trace("uniqueCols是:" + Arrays.toString(uniqueCols));
 			args = getFieldsValue(uniqueFields, daoBean);
 
-			sql = makeDeleteSql(daoBean, uniqueCols);
+			sql = makeDeleteSQL(daoBean, uniqueCols);
 
 		} else {
 			String[] notNullCols = getFieldsName(getNotNullFields(daoBean));
 			logger.trace("notNullCols是:" + Arrays.toString(notNullCols));
 			args = getNotNullValue(daoBean);
-			sql = makeDeleteSql(daoBean, notNullCols);
+			sql = makeDeleteSQL(daoBean, notNullCols);
 		}
 		logger.trace("删除的sql:" + sql + ",args:" + Arrays.toString(args));
 		try {
@@ -207,7 +143,7 @@ public class BasicDAOImpl extends MysqlDAO implements IDAO {
 		Object[] allVals = getFieldsValue(allFields, daoBean);
 		logger.trace("allVals是:" + Arrays.toString(allVals));
 
-		String sql = makeUpdateSql(daoBean, uniqueCols, allCols);
+		String sql = makeUpdateSQL(daoBean, uniqueCols, allCols);
 		Object[] arags = ArrayUtils.addAll(allVals, uniqueVals);
 		logger.trace("更新的sql:" + sql + ",args:" + Arrays.toString(arags));
 		try {
@@ -232,12 +168,10 @@ public class BasicDAOImpl extends MysqlDAO implements IDAO {
 			return null;
 		}
 		logger.trace("准备向" + dbName + "库的" + getTableName(daoBean) + "表中查询" + daoBean);
-		String[] notNullCols = getFieldsName(getNotNullFields(daoBean));
-		logger.trace("notNullCols是:" + Arrays.toString(notNullCols));
 		Object[] notNullVals = getNotNullValue(daoBean);
 		logger.trace("notNullVals是:" + Arrays.toString(notNullVals));
 
-		String sql = makeSelectSql(daoBean, notNullCols);
+		String sql = makeSelectSQL(daoBean);
 		logger.trace("查询的sql:" + sql + ",args:" + Arrays.toString(notNullVals));
 		List<D> results = null;
 		try {
@@ -248,6 +182,53 @@ public class BasicDAOImpl extends MysqlDAO implements IDAO {
 		}
 		logger.trace("查询出的results:" + results + ",daoBean:" + daoBean);
 		return results;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see cc.d_z.easyorm.dao.IDAO#insert(cc.d_z.easyorm.beans.DAOBean[])
+	 */
+	@Override
+	public <D extends DAOBean> List<Entry<D, Exception>> insert(D... daoBeans) {
+		List<Entry<D, Exception>> rs = new ArrayList<Entry<D, Exception>>();
+		for (D d : daoBeans) {
+			try {
+				insert(d);
+			} catch (Exception e) {
+				rs.add(EntryBuilder.build(d, e));
+			}
+		}
+		return rs;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see cc.d_z.easyorm.dao.IDAO#selectOne(cc.d_z.easyorm.beans.DAOBean)
+	 */
+	@Override
+	public <D extends DAOBean> D selectOne(D daoBean) throws Exception {
+		if (daoBean == null) {
+			logger.warn("准备使用" + this.getClass().getSimpleName() + "查询空");
+			return null;
+		}
+		logger.trace("准备向" + dbName + "库的" + getTableName(daoBean) + "表中查询一个" + daoBean);
+		Object[] notNullVals = getNotNullValue(daoBean);
+		logger.trace("notNullVals是:" + Arrays.toString(notNullVals));
+
+		String sql = makeSelectOneSQL(daoBean);
+		logger.trace("查询的sql:" + sql + ",args:" + Arrays.toString(notNullVals));
+		D result = null;
+		try {
+			List<D> results = getJdbcTemplate().query(sql, notNullVals, new DAOBeanRowMapper<D>(daoBean));
+			result = results != null && results.size() > 0 ? results.get(0) : null;
+		} catch (Exception e) {
+			logger.error("准备向" + dbName + "库的" + getTableName(daoBean) + "表中查询一个" + daoBean + "时报错", e);
+			throw e;
+		}
+		logger.trace("查询出的result:" + result + ",daoBean:" + daoBean);
+		return result;
 	}
 
 	class DAOBeanRowMapper<D extends DAOBean> implements RowMapper<D> {
@@ -289,39 +270,6 @@ public class BasicDAOImpl extends MysqlDAO implements IDAO {
 			return nd;
 		}
 
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see cc.d_z.easyorm.dao.IDAO#insert(cc.d_z.easyorm.beans.DAOBean[])
-	 */
-	@Override
-	public <D extends DAOBean> List<Entry<D, Exception>> insert(D... daoBean) {
-		List<Entry<D, Exception>> rs = new ArrayList<Entry<D, Exception>>();
-		for (D d : daoBean) {
-			try {
-				insert(d);
-			} catch (Exception e) {
-				rs.add(EntryBuilder.build(d, e));
-			}
-		}
-		return rs;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see cc.d_z.easyorm.dao.IDAO#selectOne(cc.d_z.easyorm.beans.DAOBean)
-	 */
-	@Override
-	public <D extends DAOBean> D selectOne(D daoBean) throws Exception {
-		List<D> ds = select(daoBean);
-		if (ds != null && ds.size() != 0) {
-			return ds.get(0);
-		} else {
-			return null;
-		}
 	}
 
 }

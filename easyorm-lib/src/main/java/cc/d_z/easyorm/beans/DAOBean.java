@@ -2,6 +2,7 @@ package cc.d_z.easyorm.beans;
 
 import java.io.Serializable;
 import java.lang.reflect.Field;
+import java.util.Random;
 
 import static org.apache.commons.lang3.ArrayUtils.*;
 import static org.apache.commons.lang3.StringUtils.*;
@@ -16,7 +17,7 @@ import static cc.d_z.easyorm.utils.DAOBeanUtils.*;
  *         email: davy@d-z.cc<br>
  *         <a href="http://d-z.cc">d-z.cc</a><br>
  */
-public class DAOBean implements Serializable{
+public class DAOBean implements Serializable {
 
 	@Override
 	public boolean equals(Object other) {
@@ -44,6 +45,28 @@ public class DAOBean implements Serializable{
 			return false;
 		}
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = "d-z.cc".hashCode();
+		try {
+			Field[] thisUniqueFields = getUniqueField(this);
+			Object[] values = null;
+			if (thisUniqueFields.length != 0) {
+				values = getValue(this, thisUniqueFields);
+			} else {
+				Field[] thisFields = getNotNullFields(this);
+				values = getValue(this, thisFields);
+			}
+			for (Object value : values) {
+				result = prime * result + ((value == null) ? 0 : value.hashCode());
+			}
+		} catch (Exception e) {
+		}
+
+		return result;
+	};
 
 	@Override
 	public String toString() {
