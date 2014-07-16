@@ -84,7 +84,7 @@ public class MysqlDAO {
 	 * 
 	 * @return the jdbc template
 	 */
-	private JdbcTemplate createJdbcTemplate() {
+	public JdbcTemplate createJdbcTemplate() {
 		DataSource dataSource = createDataSource();
 		JdbcTemplate jt = new JdbcTemplate(dataSource);
 		return jt;
@@ -95,7 +95,7 @@ public class MysqlDAO {
 	 * 
 	 * @return the data source
 	 */
-	private DataSource createDataSource() {
+	public DataSource createDataSource() {
 		BasicDataSource dataSource = new BasicDataSource();
 		setDataSourceCommon(dataSource);
 		String url = makeUrl();
@@ -110,7 +110,7 @@ public class MysqlDAO {
 	 * 
 	 * @return the string
 	 */
-	private String makeUrl() {
+	public String makeUrl() {
 		return "jdbc:mysql://" + dbip + ":" + dbport + "/" + dbName + "?useUnicode=true&characterEncoding=UTF-8";
 	}
 
@@ -120,7 +120,7 @@ public class MysqlDAO {
 	 * @param dataSource
 	 *            the new data source common
 	 */
-	private void setDataSourceCommon(BasicDataSource dataSource) {
+	public void setDataSourceCommon(BasicDataSource dataSource) {
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
 		dataSource.setInitialSize(5);
 		dataSource.setMaxActive(30);
