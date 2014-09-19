@@ -83,10 +83,11 @@ public class CacheDAOImpl extends BasicDAOImpl implements IDAO {
 	@Override
 	public <D extends DAOBean> D selectOne(D daoBean) throws Exception {
 		D value = cache.get(daoBean);
-		if (value == null)
+		if (value == null) {
 			value = super.selectOne(daoBean);
-		if (value != null)
-			cache.put(daoBean, value);
+			if (value != null)
+				cache.put(daoBean, value);
+		}
 		return value;
 	}
 }
